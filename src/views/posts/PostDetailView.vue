@@ -1,8 +1,8 @@
 <template>
 	<div>
-		<h2>제목</h2>
-		<p>내용</p>
-		<p class="text-muted">2021-01-01</p>
+		<h2>{{ form.title }}</h2>
+		<p>{{ form.content }}</p>
+		<p class="text-muted">{{ form.createdAt }}</p>
 		<hr class="my-4" />
 		<div class="row g-2">
 			<div class="col-auto">
@@ -28,14 +28,38 @@
 </template>
 
 <script setup>
-import { useRoute, useRouter } from 'vue-router';
+import { useRouter } from 'vue-router';
+import { getPostById } from '@/api/posts';
+import { ref } from 'vue';
 
-const route = useRoute();
+const props = defineProps({
+	id: Number,
+});
+
 const router = useRouter();
-const id = route.params.id;
+/**
+ * ref와 reactive 차이점
+ * ref
+ * 장점) ref는 한꺼번에 객체할당이 가능
+ * 장점) 레퍼런스타입, 프리미티브 타입 둘다 가능.
+ * 단점) form.value.title, form.value.content
+ *
+ * reactive
+ * 장점) form.title, form.content
+ * 단점) 객체 할당 불가능
+ * 단점) 레퍼런스 타입만 가능
+ */
+const form = ref({});
+
+const fetchPost = () => {
+	const data = getPostById(props.id);
+	form.value = { ...data };
+};
+fetchPost();
 
 const goListPage = () => router.push({ name: 'PostList' });
-const goEditPage = () => router.push({ name: 'PostEdit', params: { id } });
+const goEditPage = () =>
+	router.push({ name: 'PostEdit', params: { id: props.id } });
 </script>
 
 <style lang="scss" scoped></style>

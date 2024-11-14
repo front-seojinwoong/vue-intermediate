@@ -9,7 +9,7 @@ import NotFoundView from '@/views/NotFound.vue';
 import NestedView from '@/views/nested/NestedView.vue';
 import NestedOneView from '@/views/nested/NestedOneView.vue';
 import NestedTwoView from '@/views/nested/NestedTwoView.vue';
-import NestedHome from '@/views/nested/NestedHome.vue';
+import NestedHomeView from '@/views/nested/NestedHomeView.vue';
 
 const routes = [
 	{
@@ -36,6 +36,8 @@ const routes = [
 		path: '/posts/:id',
 		name: 'PostDetail',
 		component: PostDetailView,
+		// props: true,
+		props: route => ({ id: parseInt(route.params.id) }),
 	},
 	{
 		path: '/posts/:id/edit',
@@ -52,6 +54,11 @@ const routes = [
 		name: 'Nested',
 		component: NestedView,
 		children: [
+			{
+				path: '',
+				name: 'NestedHome',
+				component: NestedHomeView,
+			},
 			{
 				path: 'one',
 				name: 'NestedOne',
