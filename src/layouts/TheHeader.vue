@@ -38,6 +38,14 @@
 							>
 						</li>
 						<li class="nav-item">
+							<RouterLink
+								class="nav-link active"
+								active-class="active"
+								to="/nested"
+								>Nested</RouterLink
+							>
+						</li>
+						<li class="nav-item">
 							<button class="btn btn-outline-success" @click="goPage">
 								글쓰기
 							</button>
