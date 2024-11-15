@@ -19,7 +19,7 @@
 						<li class="nav-item">
 							<RouterLink class="nav-link active" active-class="active" to="/"
 								>Home</RouterLink
-							>sd
+							>
 						</li>
 						<li class="nav-item">
 							<RouterLink
